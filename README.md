@@ -1,9 +1,9 @@
 # DigitalHub SDK Runtime Python
 
-[![license](https://img.shields.io/badge/license-Apache%202.0-blue)](https://github.com/scc-digitalhub/digitalhub-sdk-runtime-python/LICENSE) ![GitHub Release](https://img.shields.io/github/v/release/scc-digitalhub/digitalhub-sdk-runtime-python)
+[![license](https://img.shields.io/badge/license-Apache%202.0-blue)](https://github.com/tn-aixpa/digitalhub-sdk-runtime-python/LICENSE) ![GitHub Release](https://img.shields.io/github/v/release/tn-aixpa/digitalhub-sdk-runtime-python)
 ![Status](https://img.shields.io/badge/status-stable-gold)
 
-The Digitalhub SDK Runtime Python is a runtime extension for the [Digitalhub SDK](https://github.com/scc-digitalhub/digitalhub-sdk). It enables you to create and execute python function in the Digitalhub platform.
+The Digitalhub SDK Runtime Python is a runtime extension for the [Digitalhub SDK](https://github.com/tn-aixpa/digitalhub-sdk). It enables you to create and execute python function in the Digitalhub platform.
 
 Explore the full documentation at the [link](https://scc-digitalhub.github.io/sdk-docs/runtimes/python/1-overview/).
 
