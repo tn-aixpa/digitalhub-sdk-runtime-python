@@ -10,14 +10,14 @@ from typing import Any, Callable
 
 from digitalhub.context.api import get_context
 from digitalhub.entities.project.crud import get_project
-from digitalhub.factory.factory import factory
+from digitalhub.factory.entity import entity_factory
 from digitalhub.utils.logger import LOGGER
 
 if typing.TYPE_CHECKING:
     from digitalhub.entities._base.entity.entity import Entity
     from digitalhub.entities.project._base.entity import Project
 
-    from digitalhub_runtime_python.entities.run.python_run.entity import RunPythonRun
+    from digitalhub_runtime_python.entities.run._base.entity import RunPythonRun
 
 
 def get_project_(project_name: str) -> Project:
@@ -89,7 +89,7 @@ def get_entity_inputs(inputs: dict) -> dict[str, Entity]:
         Dictionary of inputs.
     """
     try:
-        return {k: factory.build_entity_from_dict(v) for k, v in inputs.items()}
+        return {k: entity_factory.build_entity_from_dict(v) for k, v in inputs.items()}
     except Exception as e:
         msg = f"Error during inputs collection. Exception: {e.__class__}. Error: {e.args}"
         LOGGER.exception(msg)
@@ -205,6 +205,6 @@ def compose_init(init_function: Callable, context: Any, parameters: dict) -> dic
         signature_parameters.pop("context")
         expected_parameters = list(signature_parameters.keys())
         raise RuntimeError(
-            f"Init function parameters mismatch. Expected: {expected_parameters}, " f"Got: {list(parameters)}"
+            f"Init function parameters mismatch. Expected: {expected_parameters}, Got: {list(parameters)}"
         )
     return {**parameters, "context": context}

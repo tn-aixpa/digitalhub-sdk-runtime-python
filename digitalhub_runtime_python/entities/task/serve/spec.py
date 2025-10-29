@@ -4,11 +4,13 @@
 
 from __future__ import annotations
 
+from digitalhub.entities.task._base.models import CoreServiceType
 from digitalhub.entities.task._base.spec import TaskSpecFunction, TaskValidatorFunction
+from pydantic import Field
 
 
-class TaskSpecPythonBuild(TaskSpecFunction):
-    """TaskSpecPythonBuild specifications."""
+class TaskSpecPythonServe(TaskSpecFunction):
+    """TaskSpecPythonServe specifications."""
 
     def __init__(
         self,
@@ -23,7 +25,9 @@ class TaskSpecPythonBuild(TaskSpecFunction):
         profile: str | None = None,
         runtime_class: str | None = None,
         priority_class: str | None = None,
-        instructions: list | None = None,
+        replicas: int | None = None,
+        service_type: str | None = None,
+        service_name: str | None = None,
         **kwargs,
     ) -> None:
         super().__init__(
@@ -40,13 +44,21 @@ class TaskSpecPythonBuild(TaskSpecFunction):
             priority_class,
             **kwargs,
         )
-        self.instructions = instructions
+        self.replicas = replicas
+        self.service_type = service_type
+        self.service_name = service_name
 
 
-class TaskValidatorPythonBuild(TaskValidatorFunction):
+class TaskValidatorPythonServe(TaskValidatorFunction):
     """
-    TaskValidatorPythonBuild validator.
+    TaskValidatorPythonServe validator.
     """
 
-    instructions: list[str] = None
-    """Build instructions."""
+    replicas: int = Field(default=None, ge=1)
+    """Number of replicas."""
+
+    service_type: CoreServiceType = None
+    """Service type."""
+
+    service_name: str = None
+    """Service name."""

@@ -1,7 +1,7 @@
 {
   "id": "8ed8dd0a-379d-40dd-9a68-0c765d6b143e",
-  "key": "store://demo-etl/task/python+build/8ed8dd0a-379d-40dd-9a68-0c765d6b143e",
-  "kind": "python+build",
+  "key": "store://demo-etl/task/python+serve/8ed8dd0a-379d-40dd-9a68-0c765d6b143e",
+  "kind": "python+serve",
   "metadata": {
     "name": "8ed8dd0a-379d-40dd-9a68-0c765d6b143e",
     "updated_by": "digitalhubdev",
@@ -13,10 +13,15 @@
   "name": "8ed8dd0a-379d-40dd-9a68-0c765d6b143e",
   "project": "demo-etl",
   "spec": {
-    "instructions": ["apt-get update"],
+    "service_name": "serve-service",
+    "service_ports":[],
+    "service_type": "NodePort",
+    "replicas": 2,
+    "fs_group": 1000,
+    "run_as_user": 1000,
+    "run_as_group": 1000,
     "priority_class": "test",
     "runtime_class": "test",
-    "run_as_user": 1000,
     "tolerations": [],
     "affinity": {},
     "profile": "1xa100",
@@ -38,19 +43,11 @@
         "value": "test"
       }
     ],
-    "resources": {
-      "cpu": {
-        "requests": "0100m",
-        "limits": "0200m"
+      "resources": {
+        "cpu": "1",
+        "mem": "1Gi",
+        "gpu": "1"
       },
-      "mem": {
-        "requests": "0100Ki",
-        "limits": "0200Ki"
-      },
-      "gpu": {
-        "limits": "01"
-      }
-    },
     "secrets": ["secret-key"],
     "node_selector": [
       {

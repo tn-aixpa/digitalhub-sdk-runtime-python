@@ -1,7 +1,7 @@
 {
     "id": "8f61807d-6f25-49c2-ba36-c95899074af0",
     "key": "store://demo-etl/run/python+run/8f61807d-6f25-49c2-ba36-c95899074af0",
-    "kind": "python+run",
+    "kind": "python+build:run",
     "metadata": {
       "name": "8f61807d-6f25-49c2-ba36-c95899074af0",
       "updated_by": "digitalhubdev",
@@ -41,17 +41,9 @@
         "param1": 100
       },
       "resources": {
-        "cpu": {
-          "requests": "0100m",
-          "limits": "0200m"
-        },
-        "mem": {
-          "requests": "0100Ki",
-          "limits": "0200Ki"
-        },
-        "gpu": {
-          "limits": "01"
-        }
+        "cpu": "1",
+        "mem": "1Gi",
+        "gpu": "1"
       },
       "envs": [
         {

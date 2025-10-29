@@ -12,19 +12,19 @@ import requests
 from digitalhub.entities._commons.enums import Relationship, State
 from digitalhub.entities._commons.utils import get_entity_type_from_key
 from digitalhub.entities.run._base.entity import Run
-from digitalhub.factory.factory import factory
+from digitalhub.factory.entity import entity_factory
 from digitalhub.utils.exceptions import EntityError
 from digitalhub.utils.logger import LOGGER
 
-from digitalhub_runtime_python.entities._commons.enums import TaskActions
-from digitalhub_runtime_python.entities.run.python_run.utils import get_getter_for_material
+from digitalhub_runtime_python.entities._commons.enums import Actions
+from digitalhub_runtime_python.entities.run._base.utils import get_getter_for_material
 
 if typing.TYPE_CHECKING:
     from digitalhub.entities._base.entity.metadata import Metadata
     from digitalhub.entities._base.material.entity import MaterialEntity
 
-    from digitalhub_runtime_python.entities.run.python_run.spec import RunSpecPythonRun
-    from digitalhub_runtime_python.entities.run.python_run.status import RunStatusPythonRun
+    from digitalhub_runtime_python.entities.run._base.spec import RunSpecPythonRun
+    from digitalhub_runtime_python.entities.run._base.status import RunStatusPythonRun
 
 
 class RunPythonRun(Run):
@@ -50,10 +50,6 @@ class RunPythonRun(Run):
     def _setup_execution(self) -> None:
         """
         Setup run execution.
-
-        Returns
-        -------
-        None
         """
         self.refresh()
         inputs = self.inputs(as_dict=True)
@@ -81,9 +77,9 @@ class RunPythonRun(Run):
             Run object.
         """
         task_kind = self.spec.task.split("://")[0]
-        action = factory.get_action_from_task_kind(self.kind, task_kind)
+        action = entity_factory.get_action_from_task_kind(self.kind, task_kind)
 
-        if action == TaskActions.SERVE.value:
+        if action == Actions.SERVE.value:
             serve_timeout = 300
             start = time.time()
 
